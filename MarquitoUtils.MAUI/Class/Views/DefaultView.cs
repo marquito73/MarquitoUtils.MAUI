@@ -1,6 +1,7 @@
 ﻿using MarquitoUtils.Main.Class.Service.General;
 using MarquitoUtils.Main.Class.Service.Sql;
 using MarquitoUtils.Main.Class.Tools;
+using MarquitoUtils.MAUI.Class.Models;
 using System.Globalization;
 using static MarquitoUtils.Main.Class.Enums.EnumLang;
 
@@ -44,5 +45,21 @@ namespace MarquitoUtils.MAUI.Class.Views
         public abstract void Init();
 
         protected abstract void ManageTranslations();
+
+        public TViewModel GetViewModel<TViewModel>() where TViewModel : ViewModel
+        {
+            return this.BindingContext as TViewModel;
+        }
+
+        protected IDispatcherTimer InitTimer(double intervalInSeconds, Action action)
+        {
+            IDispatcherTimer timer = Application.Current.Dispatcher.CreateTimer();
+
+            timer.Interval = TimeSpan.FromSeconds(intervalInSeconds);
+            timer.Tick += (s, e) => action();
+            timer.Start();
+
+            return timer;
+        }
     }
 }
