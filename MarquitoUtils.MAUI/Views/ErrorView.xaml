@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:DefaultView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MarquitoUtils.MAUI.Class.Views;assembly=MarquitoUtils.MAUI"
+             x:Class="MarquitoUtils.MAUI.Views.ErrorView">
+    <Border Padding="10">
+        <VerticalStackLayout>
+                <Label 
+                    x:Name="LblErrorTitle"
+                    Text="Default error title"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <Label 
+                    x:Name="LblErrorStackTrace"
+                    Text="Default error stack trace"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Border>
+</local:DefaultView>

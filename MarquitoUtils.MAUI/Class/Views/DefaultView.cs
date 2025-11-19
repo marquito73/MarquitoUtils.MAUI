@@ -1,5 +1,4 @@
 ﻿using MarquitoUtils.Main.Class.Service.General;
-using MarquitoUtils.Main.Class.Service.Sql;
 using MarquitoUtils.Main.Class.Tools;
 using MarquitoUtils.MAUI.Class.Models;
 using System.Globalization;
@@ -11,14 +10,11 @@ namespace MarquitoUtils.MAUI.Class.Views
     {
         protected IServiceProvider ServiceProvider { get; }
         protected ITranslateService TranslateService { get; }
-        protected IEntityService EntityService { get; }
 
-        protected DefaultView(IServiceProvider serviceProvider, ITranslateService translateService,
-            IEntityService entityService)
+        protected DefaultView(IServiceProvider serviceProvider, ITranslateService translateService)
         {
             this.ServiceProvider = serviceProvider;
             this.TranslateService = translateService;
-            this.EntityService = entityService;
         }
 
         /// <summary>
@@ -60,6 +56,33 @@ namespace MarquitoUtils.MAUI.Class.Views
             timer.Start();
 
             return timer;
+        }
+
+        /// <summary>
+        /// Show an alert message
+        /// </summary>
+        /// <param name="title">Popup title</param>
+        /// <param name="message">Popup message</param>
+        /// <param name="cancel">Popup cancel button text</param>
+        /// <param name="windowIndex">Index of the window</param>
+        /// <returns>Async task</returns>
+        protected async Task ShowAlert(string title, string message, string cancel, int windowIndex = 0)
+        {
+            await Application.Current?.Windows[windowIndex]?.Page?.DisplayAlert(title, message, cancel);
+        }
+
+        /// <summary>
+        /// Show a question message
+        /// </summary>
+        /// <param name="title">Popup title</param>
+        /// <param name="message">Popup message</param>
+        /// <param name="validate">Popup validate button text</param>
+        /// <param name="cancel">Popup cancel button text</param>
+        /// <param name="windowIndex">Index of the window</param>
+        /// <returns>Question was validated ?</returns>
+        protected async Task<bool> ShowQuestion(string title, string message, string validate, string cancel, int windowIndex = 0)
+        {
+            return await Application.Current?.Windows[windowIndex]?.Page?.DisplayAlert(title, message, validate, cancel);
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using MarquitoUtils.Main.Class.Entities.File;
-using MarquitoUtils.Main.Class.Entities.Translation;
-using MarquitoUtils.Main.Class.Service.Files;
+﻿using MarquitoUtils.Main.Class.Entities.Translation;
 using MarquitoUtils.Main.Class.Service.General;
-using MarquitoUtils.Main.Class.Service.Sql;
 using MarquitoUtils.Main.Class.Sql;
+using MarquitoUtils.MAUI.Views;
 using System.Reflection;
 
 namespace MarquitoUtils.MAUI.Class.Startup
@@ -27,8 +25,6 @@ namespace MarquitoUtils.MAUI.Class.Startup
 
             this.ManageTranslations(assembly);
 
-            this.ManageEntityService(assembly);
-
             this.ManageViews(this.AppBuilder);
         }
 
@@ -44,19 +40,9 @@ namespace MarquitoUtils.MAUI.Class.Startup
             this.AppBuilder.Services.AddSingleton(translateService);
         }
 
-        private void ManageEntityService(Assembly assembly)
+        protected virtual void ManageViews(MauiAppBuilder builder)
         {
-            // Init startup db contexts
-            IFileService fileService = new FileService();
-            IEntityService entityService = new EntityService();
-
-            DatabaseConfiguration databaseConfiguration = fileService
-                .GetDefaultDatabaseConfiguration(assembly);
-            entityService.DbContext = DefaultDbContext.GetDbContext<DBContext>(databaseConfiguration);
-
-            this.AppBuilder.Services.AddSingleton(entityService);
+            builder.Services.AddTransient<ErrorView>();
         }
-
-        protected abstract void ManageViews(MauiAppBuilder builder);
     }
 }
