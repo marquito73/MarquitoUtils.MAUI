@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MarquitoUtils.MAUI.Class.Models
+namespace MarquitoUtils.MAUI.Models
 {
     /// <summary>
     /// Provides a base class that implements the INotifyPropertyChanged interface to support property change

@@ -1,10 +1,10 @@
-﻿using MarquitoUtils.Main.Class.Service.General;
-using MarquitoUtils.Main.Class.Tools;
-using MarquitoUtils.MAUI.Class.Models;
+﻿using MarquitoUtils.Main.Translate.Services;
+using MarquitoUtils.Main.Translate.Tools;
+using MarquitoUtils.MAUI.Models;
 using System.Globalization;
-using static MarquitoUtils.Main.Class.Enums.EnumLang;
+using static MarquitoUtils.Main.Translate.Enums.Language.EnumLang;
 
-namespace MarquitoUtils.MAUI.Class.Views
+namespace MarquitoUtils.MAUI.Views
 {
     public abstract partial class DefaultView : ContentView, IContentView
     {

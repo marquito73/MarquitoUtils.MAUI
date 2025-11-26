@@ -1,5 +1,4 @@
-using MarquitoUtils.Main.Class.Service.General;
-using MarquitoUtils.MAUI.Class.Views;
+using MarquitoUtils.Main.Translate.Services;
 
 namespace MarquitoUtils.MAUI.Views;
 

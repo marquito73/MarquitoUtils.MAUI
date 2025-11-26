@@ -1,10 +1,10 @@
-﻿using MarquitoUtils.Main.Class.Entities.Translation;
-using MarquitoUtils.Main.Class.Service.General;
-using MarquitoUtils.Main.Class.Sql;
+﻿using MarquitoUtils.Main.Sql.Context;
+using MarquitoUtils.Main.Translate.Entities;
+using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.MAUI.Views;
 using System.Reflection;
 
-namespace MarquitoUtils.MAUI.Class.Startup
+namespace MarquitoUtils.MAUI.Startup
 {
     public abstract class DefaultStartup<TApp, DBContext>
         where TApp : Application
