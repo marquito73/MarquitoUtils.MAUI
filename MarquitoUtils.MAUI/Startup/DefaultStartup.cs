@@ -1,14 +1,12 @@
-﻿using MarquitoUtils.Main.Sql.Context;
-using MarquitoUtils.Main.Translate.Entities;
+﻿using MarquitoUtils.Main.Translate.Entities;
 using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.MAUI.Views;
 using System.Reflection;
 
 namespace MarquitoUtils.MAUI.Startup
 {
-    public abstract class DefaultStartup<TApp, DBContext>
+    public abstract class DefaultStartup<TApp>
         where TApp : Application
-        where DBContext : DefaultDbContext
     {
         private MauiAppBuilder AppBuilder { get; }
         protected DefaultStartup(MauiAppBuilder builder, Assembly assembly)
@@ -43,6 +41,10 @@ namespace MarquitoUtils.MAUI.Startup
         protected virtual void ManageViews(MauiAppBuilder builder)
         {
             builder.Services.AddTransient<ErrorView>();
+        }
+
+        protected virtual void ManagePages(MauiAppBuilder builder)
+        {
         }
     }
 }

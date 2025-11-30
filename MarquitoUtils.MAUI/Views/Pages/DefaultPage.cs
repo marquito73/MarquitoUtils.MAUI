@@ -4,14 +4,14 @@ using MarquitoUtils.MAUI.Models;
 using System.Globalization;
 using static MarquitoUtils.Main.Translate.Enums.Language.EnumLang;
 
-namespace MarquitoUtils.MAUI.Views
+namespace MarquitoUtils.MAUI.Views.Pages
 {
-    public abstract partial class DefaultView : ContentView, IContentView
+    public abstract partial class DefaultPage : ContentPage, IContentView
     {
         protected IServiceProvider ServiceProvider { get; }
         protected ITranslateService TranslateService { get; }
 
-        protected DefaultView(IServiceProvider serviceProvider, ITranslateService translateService)
+        protected DefaultPage(IServiceProvider serviceProvider, ITranslateService translateService)
         {
             this.ServiceProvider = serviceProvider;
             this.TranslateService = translateService;
@@ -41,9 +41,9 @@ namespace MarquitoUtils.MAUI.Views
 
         protected abstract void ManageTranslations();
 
-        public TViewModel GetViewModel<TViewModel>() where TViewModel : ViewModel
+        public TPageModel GetPageModel<TPageModel>() where TPageModel : PageModel
         {
-            return this.BindingContext as TViewModel;
+            return this.BindingContext as TPageModel;
         }
 
         protected IDispatcherTimer InitTimer(double intervalInSeconds, Action action)
@@ -82,6 +82,17 @@ namespace MarquitoUtils.MAUI.Views
         protected async Task<bool> ShowQuestion(string title, string message, string validate, string cancel, int windowIndex = 0)
         {
             return await Application.Current?.Windows[windowIndex]?.Page?.DisplayAlert(title, message, validate, cancel);
+        }
+
+        /// <summary>
+        /// Redirect to another page
+        /// </summary>
+        /// <typeparam name="TPage">The page to redirect</typeparam>
+        /// <param name="page">The page to redirect</param>
+        protected void Redirect<TPage>(TPage page)
+            where TPage : DefaultPage
+        {
+            this.Navigation.PushAsync(page);
         }
     }
 }
