@@ -1,6 +1,6 @@
 ﻿using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.Main.Translate.Tools;
-using MarquitoUtils.MAUI.Models;
+using MarquitoUtils.MAUI.Views.Models;
 using System.Globalization;
 using static MarquitoUtils.Main.Translate.Enums.Language.EnumLang;
 
@@ -39,9 +39,9 @@ namespace MarquitoUtils.MAUI.Views
 
         public abstract void Init();
 
-        protected abstract void ManageTranslations();
+        protected abstract void ConfigureTranslations();
 
-        public TViewModel GetViewModel<TViewModel>() where TViewModel : ViewModel
+        protected TViewModel GetViewModel<TViewModel>() where TViewModel : ViewModel
         {
             return this.BindingContext as TViewModel;
         }

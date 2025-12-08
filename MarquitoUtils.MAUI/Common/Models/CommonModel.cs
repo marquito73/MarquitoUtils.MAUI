@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MarquitoUtils.MAUI.Models
+namespace MarquitoUtils.MAUI.Common.Models
 {
     /// <summary>
     /// Provides a base class that implements the INotifyPropertyChanged interface to support property change
@@ -11,7 +11,7 @@ namespace MarquitoUtils.MAUI.Models
     /// classes that participate in data binding. The PropertyChanged event is raised when a property value changes,
     /// allowing UI elements or other listeners to respond accordingly. This class is commonly used in MVVM
     /// (Model-View-ViewModel) patterns.</remarks>
-    public abstract class ViewModel : INotifyPropertyChanged
+    public class CommonModel
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

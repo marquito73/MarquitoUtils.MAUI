@@ -29,7 +29,7 @@ public partial class ErrorView : DefaultView
         this.LblErrorStackTrace.Text = this.Error.StackTrace;
     }
 
-    protected override void ManageTranslations()
+    protected override void ConfigureTranslations()
     {
 
     }

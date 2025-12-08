@@ -1,10 +1,10 @@
 ﻿using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.Main.Translate.Tools;
-using MarquitoUtils.MAUI.Models;
+using MarquitoUtils.MAUI.Pages.Models;
 using System.Globalization;
 using static MarquitoUtils.Main.Translate.Enums.Language.EnumLang;
 
-namespace MarquitoUtils.MAUI.Views.Pages
+namespace MarquitoUtils.MAUI.Pages
 {
     public abstract partial class DefaultPage : ContentPage, IContentView
     {
@@ -39,9 +39,9 @@ namespace MarquitoUtils.MAUI.Views.Pages
 
         public abstract void Init();
 
-        protected abstract void ManageTranslations();
+        protected abstract void ConfigureTranslations();
 
-        public TPageModel GetPageModel<TPageModel>() where TPageModel : PageModel
+        protected TPageModel GetPageModel<TPageModel>() where TPageModel : PageModel
         {
             return this.BindingContext as TPageModel;
         }
