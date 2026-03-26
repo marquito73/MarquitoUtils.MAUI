@@ -1,10 +1,15 @@
-﻿namespace MarquitoUtils.MAUI.Components
+﻿using System.Diagnostics.CodeAnalysis;
+using static Microsoft.Maui.Controls.BindableProperty;
+
+namespace MarquitoUtils.MAUI.Components
 {
     public abstract class Component : ContentView, IContentView
     {
+        private const DynamicallyAccessedMemberTypes DeclaringTypeMembers = DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.PublicMethods;
+        private const DynamicallyAccessedMemberTypes ReturnTypeMembers = DynamicallyAccessedMemberTypes.PublicParameterlessConstructor;
         protected Component()
         {
-
+            this.Loaded += this.OnComponentLoaded;
         }
 
         /// <summary>
@@ -21,6 +26,33 @@
         public T GetValue<T>(BindableProperty property)
         {
             return (T)GetValue(property);
+        }
+
+        protected IDispatcherTimer InitTimer(double intervalInSeconds, Action action)
+        {
+            IDispatcherTimer timer = Application.Current.Dispatcher.CreateTimer();
+
+            timer.Interval = TimeSpan.FromSeconds(intervalInSeconds);
+            timer.Tick += (s, e) => action();
+            timer.Start();
+
+            return timer;
+        }
+
+        /// <summary>
+        /// Called when the component is loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected abstract void OnComponentLoaded(object? sender, EventArgs e);
+
+        protected static BindableProperty CreateProperty<[DynamicallyAccessedMembers(ReturnTypeMembers)] TReturnType, [DynamicallyAccessedMembers(DeclaringTypeMembers)] TDeclaringType>(string propertyName, object defaultValue = null,
+            ValidateValueDelegate validateValue = null, BindingPropertyChangedDelegate propertyChanged = null, BindingPropertyChangingDelegate propertyChanging = null,
+            CoerceValueDelegate coerceValue = null, CreateDefaultValueDelegate defaultValueCreator = null)
+            where TDeclaringType : Component
+        {
+            return BindableProperty.Create(propertyName, typeof(TReturnType), typeof(TDeclaringType), defaultValue, BindingMode.TwoWay,
+                validateValue, propertyChanged, propertyChanging, coerceValue, defaultValueCreator);
         }
     }
 }

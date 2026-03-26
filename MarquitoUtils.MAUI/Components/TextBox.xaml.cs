@@ -7,7 +7,7 @@ public partial class TextBox : Component
 {
     #region Label
 
-    public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(TextBox), default(string));
+    public static readonly BindableProperty LabelProperty = CreateProperty<string, TextBox>(nameof(Label), default(string));
     /// <summary>
     /// Label of the text box
     /// </summary>
@@ -17,18 +17,18 @@ public partial class TextBox : Component
         set => SetValue(LabelProperty, value);
     }
 
-    public event EventHandler<TextChangedEventArgs> ValueChanged;
-
     #endregion Label
 
     #region Value
 
+    public event EventHandler<TextChangedEventArgs> ValueChanged;
+
     protected virtual void OnTextChanged(string oldValue, string newValue)
     {
-        ValueChanged?.Invoke(this, new TextChangedEventArgs(oldValue, newValue));
+        this.ValueChanged?.Invoke(this, new TextChangedEventArgs(oldValue, newValue));
     }
 
-    public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(string), typeof(TextBox), defaultBindingMode: BindingMode.TwoWay,
+    public static readonly BindableProperty ValueProperty = CreateProperty<string, TextBox>(nameof(Value),
         propertyChanged: (bindable, oldValue, newValue) => ((TextBox)bindable).OnTextChanged((string)oldValue, (string)newValue));
     /// <summary>
     /// Value of the text box
@@ -43,7 +43,7 @@ public partial class TextBox : Component
 
     #region Placeholder
 
-    public static readonly BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(TextBox), default(string));
+    public static readonly BindableProperty PlaceholderProperty = CreateProperty<string, TextBox>(nameof(Placeholder), default(string));
     /// <summary>
     /// Placeholder of the text box
     /// </summary>
@@ -57,7 +57,7 @@ public partial class TextBox : Component
 
     #region Keyboard
 
-    public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(InputView), Keyboard.Default,
+    public static readonly BindableProperty KeyboardProperty = CreateProperty<Keyboard, TextBox>(nameof(Keyboard), Keyboard.Default,
         coerceValue: (o, v) => (Keyboard)v ?? Keyboard.Default);
 
     /// <summary>
@@ -75,5 +75,9 @@ public partial class TextBox : Component
     public TextBox()
     {
         InitializeComponent();
+    }
+
+    protected override void OnComponentLoaded(object? sender, EventArgs e)
+    {
     }
 }
