@@ -1,4 +1,5 @@
-﻿using MarquitoUtils.Main.Translate.Services;
+﻿using MarquitoUtils.Main.Common.Tools;
+using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.Main.Translate.Tools;
 using MarquitoUtils.MAUI.Views.Models;
 using System.Globalization;
@@ -9,7 +10,7 @@ namespace MarquitoUtils.MAUI.Views
     public abstract partial class DefaultView : ContentView, IContentView
     {
         protected IServiceProvider ServiceProvider { get; }
-        protected ITranslateService TranslateService { get; }
+        private ITranslateService TranslateService { get; }
 
         protected DefaultView(IServiceProvider serviceProvider, ITranslateService translateService)
         {
@@ -82,6 +83,32 @@ namespace MarquitoUtils.MAUI.Views
         protected async Task<bool> ShowQuestion(string title, string message, string validate, string cancel, int windowIndex = 0)
         {
             return await Application.Current?.Windows[windowIndex]?.Page?.DisplayAlert(title, message, validate, cancel);
+        }
+
+        /// <summary>
+        /// Creates an instance of the specified view type, applies an optional initialization action before calling its
+        /// Init method, and returns the initialized view.
+        /// </summary>
+        /// <remarks>The view instance is resolved from the service provider. The Init method is always
+        /// called after the optional initialization action. This method is typically used to prepare views with custom
+        /// setup logic before they are initialized.</remarks>
+        /// <typeparam name="TView">The type of view to create. Must inherit from DefaultView.</typeparam>
+        /// <param name="beforeInit">An optional action to perform on the view instance before initialization. Can be null if no
+        /// pre-initialization is required.</param>
+        /// <returns>An initialized instance of the specified view type.</returns>
+        protected TView CreateView<TView>(Action<TView> beforeInit = null)
+            where TView : DefaultView
+        {
+            TView view = this.ServiceProvider.GetRequiredService<TView>();
+
+            if (Utils.IsNotNull(beforeInit))
+            {
+                beforeInit(view);
+            }
+
+            view.Init();
+
+            return view;
         }
     }
 }

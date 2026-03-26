@@ -1,6 +1,8 @@
-﻿using MarquitoUtils.Main.Translate.Services;
+﻿using MarquitoUtils.Main.Common.Tools;
+using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.Main.Translate.Tools;
 using MarquitoUtils.MAUI.Pages.Models;
+using MarquitoUtils.MAUI.Views;
 using System.Globalization;
 using static MarquitoUtils.Main.Translate.Enums.Language.EnumLang;
 
@@ -9,7 +11,7 @@ namespace MarquitoUtils.MAUI.Pages
     public abstract partial class DefaultPage : ContentPage, IContentView
     {
         protected IServiceProvider ServiceProvider { get; }
-        protected ITranslateService TranslateService { get; }
+        private ITranslateService TranslateService { get; }
 
         protected DefaultPage(IServiceProvider serviceProvider, ITranslateService translateService)
         {
@@ -88,11 +90,43 @@ namespace MarquitoUtils.MAUI.Pages
         /// Redirect to another page
         /// </summary>
         /// <typeparam name="TPage">The page to redirect</typeparam>
-        /// <param name="page">The page to redirect</param>
-        protected void Redirect<TPage>(TPage page)
+        protected void Redirect<TPage>(PageModel pageModel = null)
             where TPage : DefaultPage
         {
+            TPage page = this.ServiceProvider.GetRequiredService<TPage>();
+
+            if (Utils.IsNotNull(pageModel))
+            {
+                page.BindingContext = pageModel;
+            }
+
             this.Navigation.PushAsync(page);
+        }
+
+        /// <summary>
+        /// Creates an instance of the specified view type, applies an optional initialization action before calling its
+        /// Init method, and returns the initialized view.
+        /// </summary>
+        /// <remarks>The view instance is resolved from the service provider. The Init method is always
+        /// called after the optional initialization action. This method is typically used to prepare views with custom
+        /// setup logic before they are initialized.</remarks>
+        /// <typeparam name="TView">The type of view to create. Must inherit from DefaultView.</typeparam>
+        /// <param name="beforeInit">An optional action to perform on the view instance before initialization. Can be null if no
+        /// pre-initialization is required.</param>
+        /// <returns>An initialized instance of the specified view type.</returns>
+        protected TView CreateView<TView>(Action<TView> beforeInit = null)
+            where TView : DefaultView
+        {
+            TView view = this.ServiceProvider.GetRequiredService<TView>();
+
+            if (Utils.IsNotNull(beforeInit))
+            {
+                beforeInit(view);
+            }
+
+            view.Init();
+
+            return view;
         }
     }
 }

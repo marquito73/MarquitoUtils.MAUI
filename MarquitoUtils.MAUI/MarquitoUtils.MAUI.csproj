@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
@@ -21,10 +21,6 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Syncfusion.Maui.Charts" Version="31.2.16" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\MarquitoUtils.Main\MarquitoUtils.Main\MarquitoUtils.Main.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
