@@ -1,6 +1,10 @@
-﻿using MarquitoUtils.Main.Translate.Entities;
+﻿using MarquitoUtils.Main.Files.Services;
+using MarquitoUtils.Main.Translate.Entities;
 using MarquitoUtils.Main.Translate.Services;
+using MarquitoUtils.MAUI.Config;
 using MarquitoUtils.MAUI.Views;
+using Syncfusion.Licensing;
+using Syncfusion.Maui.Core.Hosting;
 using System.Reflection;
 
 namespace MarquitoUtils.MAUI.Startup
@@ -9,17 +13,26 @@ namespace MarquitoUtils.MAUI.Startup
         where TApp : Application
     {
         private MauiAppBuilder AppBuilder { get; }
+        private IFileService FileService { get; } = new FileService();
+
         protected DefaultStartup(MauiAppBuilder builder, Assembly assembly)
         {
             this.AppBuilder = builder;
 
             this.AppBuilder
                 .UseMauiApp<TApp>()
+                .ConfigureSyncfusionCore()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            if (this.RegisterSyncFusionLicenseKeyFromConfigFile())
+            {
+                this.AppBuilder.ConfigureSyncfusionCore();
+                SyncfusionLicenseProvider.RegisterLicense(this.GetSyncFusionLicenseKeyFromConfigFile().LicenseKey);
+            }
 
             this.ConfigureTranslations(assembly);
 
@@ -28,9 +41,7 @@ namespace MarquitoUtils.MAUI.Startup
             this.ConfigureViews(this.AppBuilder);
 
             this.ConfigureOptions(this.AppBuilder);
-
-            this.ManageViews(this.AppBuilder);
-            }
+        }
 
         private void ConfigureTranslations(Assembly assembly)
         {
@@ -53,10 +64,6 @@ namespace MarquitoUtils.MAUI.Startup
             builder.Services.AddTransient<ErrorView>();
         }
 
-        protected virtual void ManagePages(MauiAppBuilder builder)
-        {
-        }
-
         protected abstract void ConfigureOptions(MauiAppBuilder builder);
 
         /// <summary>
@@ -65,5 +72,7 @@ namespace MarquitoUtils.MAUI.Startup
         /// <remarks>Config file need to be File\Configuration\SyncFusion.config (as embedded resource)</remarks>
         /// <returns></returns>
         protected abstract bool RegisterSyncFusionLicenseKeyFromConfigFile();
+
+        protected abstract SyncFusionConfiguration GetSyncFusionLicenseKeyFromConfigFile();
     }
 }

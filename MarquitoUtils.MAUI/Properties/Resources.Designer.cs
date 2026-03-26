@@ -61,6 +61,15 @@ namespace MarquitoUtils.MAUI.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à File\Configuration\SyncFusion.config.
+        /// </summary>
+        internal static string SyncFusionFilePath {
+            get {
+                return ResourceManager.GetString("SyncFusionFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à \File\Translation\Translation.xml.
         /// </summary>
         internal static string TranslateFilePath {
