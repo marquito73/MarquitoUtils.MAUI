@@ -19,11 +19,22 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <MauiFont Include="Resources\Fonts\marquito.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Syncfusion.Maui.Charts" Version="31.2.16" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\MarquitoUtils.Main\MarquitoUtils.Main\MarquitoUtils.Main.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Components\IconComponent.xaml.cs">
+	    <DependentUpon>IconComponent.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Properties\Resources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -39,6 +50,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\IconComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\TextBox.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

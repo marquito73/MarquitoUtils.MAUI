@@ -1,0 +1,13 @@
+<Components:Component xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Components="clr-namespace:MarquitoUtils.MAUI.Components;assembly=MarquitoUtils.MAUI"
+    x:Class="MarquitoUtils.MAUI.Components.IconComponent"
+    x:Name="Root">
+    <Label 
+        Text="{Binding IconValue, Source={x:Reference Root}}"
+        FontFamily="marquito"
+        FontSize="{Binding FontSize, Source={x:Reference Root}}"
+        TextColor="{Binding TextColor, Source={x:Reference Root}}"
+        VerticalOptions="Center" 
+        HorizontalOptions="Start" />
+</Components:Component>

@@ -24,8 +24,10 @@ namespace MarquitoUtils.MAUI.Startup
                 .ConfigureSyncfusionCore()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular")
+                        .AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold")
+                        // Icons
+                        .AddFont("marquito.ttf", "marquito");
                 });
 
             if (this.RegisterSyncFusionLicenseKeyFromConfigFile())
@@ -57,6 +59,7 @@ namespace MarquitoUtils.MAUI.Startup
 
         protected virtual void ConfigurePages(MauiAppBuilder builder)
         {
+            // TODO Add attribute to mark pages and add them here with reflection
         }
 
         protected virtual void ConfigureViews(MauiAppBuilder builder)
