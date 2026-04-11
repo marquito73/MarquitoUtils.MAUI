@@ -1,6 +1,7 @@
-﻿using MarquitoUtils.Main.Files.Services;
+﻿using MarquitoUtils.Main.Common.Tools;
 using MarquitoUtils.Main.Translate.Entities;
 using MarquitoUtils.Main.Translate.Services;
+using MarquitoUtils.MAUI.Common.Attributes;
 using MarquitoUtils.MAUI.Config;
 using MarquitoUtils.MAUI.Views;
 using Syncfusion.Licensing;
@@ -13,7 +14,6 @@ namespace MarquitoUtils.MAUI.Startup
         where TApp : Application
     {
         private MauiAppBuilder AppBuilder { get; }
-        private IFileService FileService { get; } = new FileService();
 
         protected DefaultStartup(MauiAppBuilder builder, Assembly assembly)
         {
@@ -38,9 +38,9 @@ namespace MarquitoUtils.MAUI.Startup
 
             this.ConfigureTranslations(assembly);
 
-            this.ConfigurePages(this.AppBuilder);
+            this.ConfigurePages(assembly);
 
-            this.ConfigureViews(this.AppBuilder);
+            this.ConfigureViews(assembly);
 
             this.ConfigureOptions(this.AppBuilder);
         }
@@ -57,14 +57,37 @@ namespace MarquitoUtils.MAUI.Startup
             this.AppBuilder.Services.AddSingleton(translateService);
         }
 
-        protected virtual void ConfigurePages(MauiAppBuilder builder)
+        /// <summary>
+        /// Configure all the pages of the app, marked with the [PageIdentificator] attribute, as transient services.
+        /// </summary>
+        /// <param name="builder">App builder</param>
+        /// <param name="assembly">Assembly</param>
+        private void ConfigurePages(Assembly assembly)
         {
-            // TODO Add attribute to mark pages and add them here with reflection
+            assembly.GetTypes()
+                .Where(type => type.ClassHasAttribute<PageIdentificatorAttribute>())
+                .ForEach(pageType =>
+                {
+                    this.AppBuilder.Services.AddTransient(pageType);
+                });
         }
 
-        protected virtual void ConfigureViews(MauiAppBuilder builder)
+        /// <summary>
+        /// Configure all the views of the app, marked with the [ViewIdentificator] attribute, as transient services.
+        /// </summary>
+        /// <param name="builder">App builder</param>
+        /// <param name="assembly">Assembly</param>
+        private void ConfigureViews(Assembly assembly)
         {
-            builder.Services.AddTransient<ErrorView>();
+            this.AppBuilder.Services.AddTransient<ErrorView>();
+
+
+            assembly.GetTypes()
+                .Where(type => type.ClassHasAttribute<ViewIdentificatorAttribute>())
+                .ForEach(viewType =>
+                {
+                    this.AppBuilder.Services.AddTransient(viewType);
+                });
         }
 
         protected abstract void ConfigureOptions(MauiAppBuilder builder);
