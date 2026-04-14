@@ -2,7 +2,7 @@ using MarquitoUtils.MAUI.Common.Enums;
 
 namespace MarquitoUtils.MAUI.Components;
 
-public partial class IconComponent : Component
+public partial class IconButton : Component
 {
     public static readonly BindableProperty IconProperty = CreateProperty<Icon, IconComponent>(nameof(Icon));
 
@@ -37,7 +37,12 @@ public partial class IconComponent : Component
         set { SetValue(FontSizeProperty, value); }
     }
 
-    public IconComponent()
+    /// <summary>
+    /// Occurs when the button is clicked/tapped.
+    /// </summary>
+    public event EventHandler Clicked;
+
+    public IconButton()
     {
         InitializeComponent();
     }
@@ -45,5 +50,10 @@ public partial class IconComponent : Component
     protected override void OnComponentLoaded(object? sender, EventArgs e)
     {
         this.IconValue = this.Icon.GetIconUniCodeCharacter();
+    }
+
+    private void IconButton_Clicked(object sender, EventArgs e)
+    {
+        this.Clicked?.Invoke(this, e);
     }
 }
