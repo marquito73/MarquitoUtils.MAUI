@@ -1,4 +1,5 @@
-﻿using MarquitoUtils.Main.Common.Tools;
+﻿using CommunityToolkit.Maui;
+using MarquitoUtils.Main.Common.Tools;
 using MarquitoUtils.Main.Translate.Entities;
 using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.MAUI.Common.Attributes;
@@ -21,7 +22,7 @@ namespace MarquitoUtils.MAUI.Startup
 
             this.AppBuilder
                 .UseMauiApp<TApp>()
-                .ConfigureSyncfusionCore()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular")
