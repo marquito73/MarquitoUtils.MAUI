@@ -93,14 +93,25 @@ namespace MarquitoUtils.MAUI.Pages
         protected void Redirect<TPage>(PageModel pageModel = null)
             where TPage : DefaultPage
         {
-            TPage page = this.ServiceProvider.GetRequiredService<TPage>();
-
-            if (Utils.IsNotNull(pageModel))
+            Microsoft.Maui.Controls.Shell.Current.GoToAsync($"{typeof(TPage).Name}", new Dictionary<string, object>()
             {
-                page.BindingContext = pageModel;
-            }
+                { "ViewModel", pageModel },
+            });
+        }
 
-            this.Navigation.PushAsync(page);
+        /// <summary>
+        /// Redirect to another page
+        /// </summary>
+        /// <typeparam name="TMainPage">The main page, parent of the page</typeparam>
+        /// <typeparam name="TPage">The page to redirect</typeparam>
+        protected void Redirect<TMainPage, TPage>(PageModel pageModel = null)
+            where TMainPage : DefaultPage
+            where TPage : DefaultPage
+        {
+            Microsoft.Maui.Controls.Shell.Current.GoToAsync($"//{typeof(TMainPage).Name}/{typeof(TPage).Name}", new Dictionary<string, object>()
+            {
+                { "ViewModel", pageModel },
+            });
         }
 
         /// <summary>

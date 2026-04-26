@@ -1,5 +1,6 @@
 ﻿using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.Main.Translate.Tools;
+using MarquitoUtils.MAUI.Pages;
 using System.Globalization;
 using static MarquitoUtils.Main.Translate.Enums.Language.EnumLang;
 
@@ -34,6 +35,16 @@ namespace MarquitoUtils.MAUI.Shell
         protected string GetTranslation<T>(string translationKey)
         {
             return this.TranslateService.GetTranslation<T>(translationKey, this.GetCurrentLanguage());
+        }
+
+        /// <summary>
+        /// Register a route for a page
+        /// </summary>
+        /// <typeparam name="TPage">The page</typeparam>
+        protected void RegisterRoute<TPage>()
+            where TPage : DefaultPage
+        {
+            Routing.RegisterRoute(typeof(TPage).Name, typeof(TPage));
         }
     }
 }
