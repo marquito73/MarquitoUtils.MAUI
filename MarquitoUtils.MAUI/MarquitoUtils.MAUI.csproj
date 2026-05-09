@@ -55,6 +55,9 @@
 	  <MauiXaml Update="Components\ColorPicker.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\ComboBox.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\DatePicker.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
