@@ -2,7 +2,7 @@
 <Components:Component xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:Components="clr-namespace:MarquitoUtils.MAUI.Components;assembly=MarquitoUtils.MAUI"
-    x:Class="MarquitoUtils.MAUI.Components.ComboBox"
+    x:Class="MarquitoUtils.MAUI.Components.DropDown"
     x:Name="Root">
     <StackLayout Orientation="Vertical" Margin="10">
         <Label 
@@ -13,6 +13,6 @@
         <Picker
             ItemsSource="{Binding ItemsSource, Source={x:Reference Root}}"
             SelectedItem="{Binding SelectedItem, Source={x:Reference Root}}"
-            ItemDisplayBinding="{Binding ValueToDisplay}"/>
+            ItemDisplayBinding="{Binding DisplayValue}"/>
     </StackLayout>
 </Components:Component>

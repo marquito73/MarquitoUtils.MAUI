@@ -5,15 +5,15 @@ using MarquitoUtils.MAUI.Components.Models;
 namespace MarquitoUtils.MAUI.Components;
 
 /// <summary>
-/// Combo box component
+/// Drop down component
 /// </summary>
-public partial class ComboBox : Component
+public partial class DropDown : Component
 {
     #region Label
 
-    public static readonly BindableProperty LabelProperty = CreateProperty<string, ComboBox>(nameof(Label), default(string));
+    public static readonly BindableProperty LabelProperty = CreateProperty<string, DropDown>(nameof(Label), default(string));
     /// <summary>
-    /// Label of the combo box
+    /// Label of the Drop down
     /// </summary>
     public string Label
     {
@@ -25,14 +25,14 @@ public partial class ComboBox : Component
 
     #region Item source
 
-    public static readonly BindableProperty ItemsSourceProperty = CreateProperty<List<ComboItemModel>, ComboBox>(nameof(ItemsSource), default(List<ComboItemModel>));
+    public static readonly BindableProperty ItemsSourceProperty = CreateProperty<List<DropDownItemModel>, DropDown>(nameof(ItemsSource), default(List<DropDownItemModel>));
 
     /// <summary>
-    /// Item source of the combo box
+    /// Item source of the Drop down
     /// </summary>
-    public List<ComboItemModel> ItemsSource
+    public List<DropDownItemModel> ItemsSource
     {
-        get => this.GetValue<List<ComboItemModel>>(ItemsSourceProperty);
+        get => this.GetValue<List<DropDownItemModel>>(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);
     }
 
@@ -40,23 +40,23 @@ public partial class ComboBox : Component
 
     #region Selected item
 
-    public static readonly BindableProperty SelectedItemProperty = CreateProperty<ComboItemModel, ComboBox>(nameof(SelectedItem), default(ComboItemModel));
+    public static readonly BindableProperty SelectedItemProperty = CreateProperty<DropDownItemModel, DropDown>(nameof(SelectedItem), default(DropDownItemModel));
 
     /// <summary>
-    /// Item source of the combo box
+    /// Item source of the Drop down
     /// </summary>
-    public ComboItemModel SelectedItem
+    public DropDownItemModel SelectedItem
     {
-        get => this.GetValue<ComboItemModel>(SelectedItemProperty);
+        get => this.GetValue<DropDownItemModel>(SelectedItemProperty);
         set => SetValue(SelectedItemProperty, value);
     }
 
     #endregion Selected item
 
     /// <summary>
-    /// Combo box component constructor
+    /// Drop down component constructor
     /// </summary>
-    public ComboBox()
+    public DropDown()
     {
         InitializeComponent();
     }

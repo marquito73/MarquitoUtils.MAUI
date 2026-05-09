@@ -3,7 +3,7 @@
     /// <summary>
     /// Model for combo box item
     /// </summary>
-    public class ComboItemModel
+    public class DropDownItemModel
     {
         /// <summary>
         /// Value of the combo box item
