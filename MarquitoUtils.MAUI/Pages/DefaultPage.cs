@@ -2,6 +2,7 @@
 using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.Main.Translate.Tools;
 using MarquitoUtils.MAUI.Pages.Models;
+using MarquitoUtils.MAUI.Tools;
 using MarquitoUtils.MAUI.Views;
 using System.Globalization;
 using static MarquitoUtils.Main.Translate.Enums.Language.EnumLang;
@@ -11,7 +12,7 @@ namespace MarquitoUtils.MAUI.Pages
     public abstract partial class DefaultPage : ContentPage, IContentView
     {
         protected IServiceProvider ServiceProvider { get; }
-        private ITranslateService TranslateService { get; }
+        protected ITranslateService TranslateService { get; }
 
         protected DefaultPage(IServiceProvider serviceProvider, ITranslateService translateService)
         {
@@ -90,10 +91,12 @@ namespace MarquitoUtils.MAUI.Pages
         /// Redirect to another page
         /// </summary>
         /// <typeparam name="TPage">The page to redirect</typeparam>
-        protected void Redirect<TPage>(PageModel pageModel = null)
+        protected void Redirect<TPage>(PageModel pageModel = null, bool useAbsoluteUri = false)
             where TPage : DefaultPage
         {
-            Microsoft.Maui.Controls.Shell.Current.GoToAsync($"{typeof(TPage).Name}", new Dictionary<string, object>()
+            string uri = new PageUriBuilder(useAbsoluteUri).AddPage<TPage>().Build();
+
+            Microsoft.Maui.Controls.Shell.Current.GoToAsync(uri, new Dictionary<string, object>()
             {
                 { "ViewModel", pageModel },
             });
@@ -104,11 +107,31 @@ namespace MarquitoUtils.MAUI.Pages
         /// </summary>
         /// <typeparam name="TMainPage">The main page, parent of the page</typeparam>
         /// <typeparam name="TPage">The page to redirect</typeparam>
-        protected void Redirect<TMainPage, TPage>(PageModel pageModel = null)
+        protected void Redirect<TMainPage, TPage>(PageModel pageModel = null, bool useAbsoluteUri = false)
             where TMainPage : DefaultPage
             where TPage : DefaultPage
         {
-            Microsoft.Maui.Controls.Shell.Current.GoToAsync($"//{typeof(TMainPage).Name}/{typeof(TPage).Name}", new Dictionary<string, object>()
+            string uri = new PageUriBuilder(useAbsoluteUri).AddPage<TMainPage>().AddPage<TPage>().Build();
+
+            Microsoft.Maui.Controls.Shell.Current.GoToAsync(uri, new Dictionary<string, object>()
+            {
+                { "ViewModel", pageModel },
+            });
+        }
+
+        /// <summary>
+        /// Redirect to another page
+        /// </summary>
+        /// <typeparam name="TMainPage">The main page, parent of the page</typeparam>
+        /// <typeparam name="TPage">The page to redirect</typeparam>
+        protected void Redirect<TMainPage, TMainSubPage, TPage>(PageModel pageModel = null, bool useAbsoluteUri = false)
+            where TMainPage : DefaultPage
+            where TMainSubPage : DefaultPage
+            where TPage : DefaultPage
+        {
+            string uri = new PageUriBuilder(useAbsoluteUri).AddPage<TMainPage>().AddPage<TMainSubPage>().AddPage<TPage>().Build();
+
+            Microsoft.Maui.Controls.Shell.Current.GoToAsync(uri, new Dictionary<string, object>()
             {
                 { "ViewModel", pageModel },
             });
