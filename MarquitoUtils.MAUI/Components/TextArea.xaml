@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Components:Component xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Components="clr-namespace:MarquitoUtils.MAUI.Components;assembly=MarquitoUtils.MAUI"
+    x:Class="MarquitoUtils.MAUI.Components.TextArea"
+    x:Name="Root">
+    <StackLayout Orientation="Vertical" Margin="10">
+        <Label 
+            Text="{Binding Label, Source={x:Reference Root}}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" />
+
+        <Editor 
+            Placeholder="{Binding Placeholder, Source={x:Reference Root}}" 
+            Keyboard="{Binding Keyboard, Source={x:Reference Root}}"
+            Text="{Binding Value, Source={x:Reference Root}}"
+            IsEnabled="{Binding IsEnabled, Source={x:Reference Root}}"
+            HeightRequest="{Binding Height, Source={x:Reference Root}}"
+            MaxLength="{Binding MaxLength, Source={x:Reference Root}}"/>
+    </StackLayout>
+</Components:Component>

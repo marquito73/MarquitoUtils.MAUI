@@ -64,6 +64,9 @@
 	  <MauiXaml Update="Components\IconComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\TextArea.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\TextBox.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
