@@ -138,6 +138,14 @@ namespace MarquitoUtils.MAUI.Pages
         }
 
         /// <summary>
+        /// Redirect to the previous page in the navigation stack
+        /// </summary>
+        protected void RedirectPreviousPage()
+        {
+            Microsoft.Maui.Controls.Shell.Current.GoToAsync("..");
+        }
+
+        /// <summary>
         /// Creates an instance of the specified view type, applies an optional initialization action before calling its
         /// Init method, and returns the initialized view.
         /// </summary>
