@@ -1,9 +1,9 @@
-namespace MarquitoUtils.MAUI.Components;
+namespace MarquitoUtils.MAUI.Components.Form;
 
 /// <summary>
 /// Date picker component
 /// </summary>
-public partial class DatePicker : Component
+public partial class DatePicker : FormComponent
 {
     #region Label
 

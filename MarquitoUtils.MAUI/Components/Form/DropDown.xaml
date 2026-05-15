@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FormComponents:FormComponent xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Components="clr-namespace:MarquitoUtils.MAUI.Components;assembly=MarquitoUtils.MAUI"
+    xmlns:FormComponents="clr-namespace:MarquitoUtils.MAUI.Components.Form;assembly=MarquitoUtils.MAUI"
+    x:Class="MarquitoUtils.MAUI.Components.Form.DropDown"
+    x:Name="Root">
+    <StackLayout Spacing="10" Orientation="Vertical" Margin="10">
+        <VerticalStackLayout>
+            <Label 
+            Text="{Binding Label, Source={x:Reference Root}}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" />
+
+            <Picker
+            ItemsSource="{Binding ItemsSource, Source={x:Reference Root}}"
+            SelectedItem="{Binding SelectedItem, Source={x:Reference Root}}"
+            ItemDisplayBinding="{Binding DisplayValue}"/>
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout
+            Spacing="10"
+            IsVisible="{Binding ErrorIsDisplayed, Source={x:Reference Root}}">
+            <Components:IconComponent
+                Icon="WARNING"
+                IconColor="Red"
+                />
+
+            <Label
+                Text="{Binding ErrorValue, Source={x:Reference Root}}"
+                TextColor="Red"/>
+        </HorizontalStackLayout>
+    </StackLayout>
+</FormComponents:FormComponent>

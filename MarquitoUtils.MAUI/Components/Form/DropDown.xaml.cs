@@ -2,12 +2,12 @@
 
 using MarquitoUtils.MAUI.Components.Models;
 
-namespace MarquitoUtils.MAUI.Components;
+namespace MarquitoUtils.MAUI.Components.Form;
 
 /// <summary>
 /// Drop down component
 /// </summary>
-public partial class DropDown : Component
+public partial class DropDown : FormComponent
 {
     #region Label
 

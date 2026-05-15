@@ -1,9 +1,9 @@
-namespace MarquitoUtils.MAUI.Components;
+namespace MarquitoUtils.MAUI.Components.Form;
 
 /// <summary>
 /// Color picker component
 /// </summary>
-public partial class ColorPicker : Component
+public partial class ColorPicker : FormComponent
 {
     #region Label
 

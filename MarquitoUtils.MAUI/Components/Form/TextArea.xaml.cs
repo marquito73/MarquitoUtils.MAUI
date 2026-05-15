@@ -1,9 +1,9 @@
-namespace MarquitoUtils.MAUI.Components;
+namespace MarquitoUtils.MAUI.Components.Form;
 
 /// <summary>
 /// Text area component
 /// </summary>
-public partial class TextArea : Component
+public partial class TextArea : FormComponent
 {
     #region Label
 
