@@ -8,15 +8,15 @@
     <StackLayout Spacing="10" Orientation="Vertical" Margin="10">
         <VerticalStackLayout>
             <Label 
-            Text="{Binding Label, Source={x:Reference Root}}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Start" />
+                Text="{Binding Label, Source={x:Reference Root}}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
 
             <Entry 
-            Placeholder="{Binding Placeholder, Source={x:Reference Root}}" 
-            Keyboard="{Binding Keyboard, Source={x:Reference Root}}"
-            Text="{Binding Value, Source={x:Reference Root}}"
-            IsEnabled="{Binding IsEnabled, Source={x:Reference Root}}"
+                Placeholder="{Binding Placeholder, Source={x:Reference Root}}" 
+                Keyboard="{Binding Keyboard, Source={x:Reference Root}}"
+                Text="{Binding Value, Source={x:Reference Root}}"
+                IsEnabled="{Binding IsEnabled, Source={x:Reference Root}}"
                 />
         </VerticalStackLayout>
 
@@ -24,7 +24,7 @@
             Spacing="10"
             IsVisible="{Binding ErrorIsDisplayed, Source={x:Reference Root}}">
             <Components:IconComponent
-                Icon="WARNING"
+                Icon="NOTIFICATION"
                 IconColor="Red"
                 />
             

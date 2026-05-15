@@ -28,7 +28,7 @@
             Spacing="10"
             IsVisible="{Binding ErrorIsDisplayed, Source={x:Reference Root}}">
             <Components:IconComponent
-                Icon="WARNING"
+                Icon="NOTIFICATION"
                 IconColor="Red"
                 />
 
