@@ -17,6 +17,7 @@
                 Keyboard="{Binding Keyboard, Source={x:Reference Root}}"
                 Text="{Binding Value, Source={x:Reference Root}}"
                 IsEnabled="{Binding IsEnabled, Source={x:Reference Root}}"
+                TextChanged="OnComponentChange"
                 />
         </VerticalStackLayout>
 

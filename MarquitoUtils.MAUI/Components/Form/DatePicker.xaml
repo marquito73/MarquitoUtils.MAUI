@@ -8,13 +8,14 @@
     <StackLayout Spacing="10" Orientation="Vertical" Margin="10">
         <VerticalStackLayout>
             <Label 
-            Text="{Binding Label, Source={x:Reference Root}}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Start" />
+                Text="{Binding Label, Source={x:Reference Root}}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
 
             <DatePicker 
-            Date="{Binding Date, Source={x:Reference Root}}"
-            IsEnabled="{Binding IsEnabled, Source={x:Reference Root}}"/>
+                Date="{Binding Date, Source={x:Reference Root}}"
+                IsEnabled="{Binding IsEnabled, Source={x:Reference Root}}"
+                DateSelected="OnComponentChange"/>
         </VerticalStackLayout>
 
         <HorizontalStackLayout

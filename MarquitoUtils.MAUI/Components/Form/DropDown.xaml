@@ -8,14 +8,15 @@
     <StackLayout Spacing="10" Orientation="Vertical" Margin="10">
         <VerticalStackLayout>
             <Label 
-            Text="{Binding Label, Source={x:Reference Root}}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Start" />
+                Text="{Binding Label, Source={x:Reference Root}}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
 
             <Picker
-            ItemsSource="{Binding ItemsSource, Source={x:Reference Root}}"
-            SelectedItem="{Binding SelectedItem, Source={x:Reference Root}}"
-            ItemDisplayBinding="{Binding DisplayValue}"/>
+                ItemsSource="{Binding ItemsSource, Source={x:Reference Root}}"
+                SelectedItem="{Binding SelectedItem, Source={x:Reference Root}}"
+                ItemDisplayBinding="{Binding DisplayValue}"
+                SelectedIndexChanged="OnComponentChange"/>
         </VerticalStackLayout>
 
         <HorizontalStackLayout

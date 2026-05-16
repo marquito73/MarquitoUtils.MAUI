@@ -49,5 +49,19 @@
 
             this.ErrorValue = string.Empty;
         }
+
+        /// <summary>
+        /// Event triggered when the component value changes, used to attach events on it, and hide error when the user change the value of the component, 
+        /// to avoid displaying an error message when the user has already changed the value after an error was displayed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public virtual void OnComponentChange(object? sender, EventArgs e)
+        {
+            if (this.ErrorIsDisplayed)
+            {
+                this.HideError();
+            }
+        }
     }
 }

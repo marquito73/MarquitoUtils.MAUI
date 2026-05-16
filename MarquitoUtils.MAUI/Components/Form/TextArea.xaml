@@ -18,7 +18,8 @@
                 Text="{Binding Value, Source={x:Reference Root}}"
                 IsEnabled="{Binding IsEnabled, Source={x:Reference Root}}"
                 HeightRequest="{Binding Height, Source={x:Reference Root}}"
-                MaxLength="{Binding MaxLength, Source={x:Reference Root}}"/>
+                MaxLength="{Binding MaxLength, Source={x:Reference Root}}"
+                TextChanged="OnComponentChange"/>
         </VerticalStackLayout>
 
         <HorizontalStackLayout

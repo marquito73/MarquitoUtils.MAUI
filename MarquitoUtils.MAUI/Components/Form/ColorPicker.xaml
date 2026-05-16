@@ -13,15 +13,16 @@
         Spacing="10">
         <VerticalStackLayout>
             <Label 
-            Text="{Binding Label, Source={x:Reference Root}}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Start" />
+                Text="{Binding Label, Source={x:Reference Root}}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
 
             <SyncFusionComponents:SfColorPicker
-            IsEnabled="{Binding IsEnabled, Source={x:Reference Root}}"
-            BackgroundColor="{Binding PickerBackgroundColor, Source={x:Reference Root}}"
-            SelectedColor="{Binding PickerSelectedColor, Source={x:Reference Root}}"
-            />
+                IsEnabled="{Binding IsEnabled, Source={x:Reference Root}}"
+                BackgroundColor="{Binding PickerBackgroundColor, Source={x:Reference Root}}"
+                SelectedColor="{Binding PickerSelectedColor, Source={x:Reference Root}}"
+                ColorSelected="OnComponentChange"
+                />
         </VerticalStackLayout>
 
         <HorizontalStackLayout
