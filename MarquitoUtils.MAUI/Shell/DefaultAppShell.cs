@@ -41,7 +41,7 @@ namespace MarquitoUtils.MAUI.Shell
         /// Register a route for a page
         /// </summary>
         /// <typeparam name="TPage">The page</typeparam>
-        protected void RegisterRoute<TPage>()
+        protected void RegisterPage<TPage>()
             where TPage : DefaultPage
         {
             Routing.RegisterRoute(typeof(TPage).Name, typeof(TPage));

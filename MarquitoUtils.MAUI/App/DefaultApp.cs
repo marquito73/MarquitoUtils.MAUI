@@ -2,7 +2,7 @@
 
 namespace MarquitoUtils.MAUI.App
 {
-    public partial class DefaultApp : Application
+    public abstract partial class DefaultApp : Application
     {
         protected IServiceProvider ServiceProvider { get; }
         protected ITranslateService TranslateService { get; }

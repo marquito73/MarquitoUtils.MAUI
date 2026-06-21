@@ -16,6 +16,7 @@ namespace MarquitoUtils.MAUI.Pages
 
         protected DefaultPage(IServiceProvider serviceProvider, ITranslateService translateService)
         {
+            this.Loaded += this.OnPageLoaded;
             this.ServiceProvider = serviceProvider;
             this.TranslateService = translateService;
         }
@@ -39,8 +40,6 @@ namespace MarquitoUtils.MAUI.Pages
         {
             return this.TranslateService.GetTranslation<T>(translationKey, this.GetCurrentLanguage());
         }
-
-        public abstract void Init();
 
         protected abstract void ConfigureTranslations();
 
@@ -170,5 +169,12 @@ namespace MarquitoUtils.MAUI.Pages
 
             return view;
         }
+
+        /// <summary>
+        /// Called when the page is loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected abstract void OnPageLoaded(object? sender, EventArgs e);
     }
 }
