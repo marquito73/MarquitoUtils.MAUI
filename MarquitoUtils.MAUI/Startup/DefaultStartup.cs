@@ -2,8 +2,8 @@
 using MarquitoUtils.Main.Common.Tools;
 using MarquitoUtils.Main.Translate.Entities;
 using MarquitoUtils.Main.Translate.Services;
-using MarquitoUtils.MAUI.Common.Attributes;
 using MarquitoUtils.MAUI.Config;
+using MarquitoUtils.MAUI.Pages;
 using MarquitoUtils.MAUI.Views;
 using Syncfusion.Licensing;
 using Syncfusion.Maui.Core.Hosting;
@@ -58,15 +58,17 @@ namespace MarquitoUtils.MAUI.Startup
             this.AppBuilder.Services.AddSingleton(translateService);
         }
 
+        #region Register pages and views
+
         /// <summary>
-        /// Configure all the pages of the app, marked with the [PageIdentificator] attribute, as transient services.
+        /// Configure all the pages of the app as transient services.
         /// </summary>
         /// <param name="builder">App builder</param>
         /// <param name="assembly">Assembly</param>
         private void ConfigurePages(Assembly assembly)
         {
             assembly.GetTypes()
-                .Where(type => type.ClassHasAttribute<PageIdentificatorAttribute>())
+                .Where(type => type.IsInheritedBy<DefaultPage>())
                 .ForEach(pageType =>
                 {
                     this.AppBuilder.Services.AddTransient(pageType);
@@ -74,7 +76,7 @@ namespace MarquitoUtils.MAUI.Startup
         }
 
         /// <summary>
-        /// Configure all the views of the app, marked with the [ViewIdentificator] attribute, as transient services.
+        /// Configure all the views of the app as transient services.
         /// </summary>
         /// <param name="builder">App builder</param>
         /// <param name="assembly">Assembly</param>
@@ -84,12 +86,15 @@ namespace MarquitoUtils.MAUI.Startup
 
 
             assembly.GetTypes()
-                .Where(type => type.ClassHasAttribute<ViewIdentificatorAttribute>())
+                .Where(type => type.IsInheritedBy<DefaultView>())
                 .ForEach(viewType =>
                 {
                     this.AppBuilder.Services.AddTransient(viewType);
                 });
         }
+
+        #endregion Register pages and view
+        #endregion Register pages and views
 
         protected abstract void ConfigureOptions(MauiAppBuilder builder);
 
