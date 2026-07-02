@@ -1,6 +1,7 @@
 ﻿using MarquitoUtils.Main.Common.Tools;
 using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.Main.Translate.Tools;
+using MarquitoUtils.MAUI.Modals;
 using MarquitoUtils.MAUI.Pages.Models;
 using MarquitoUtils.MAUI.Tools;
 using MarquitoUtils.MAUI.Views;
@@ -168,6 +169,19 @@ namespace MarquitoUtils.MAUI.Pages
             view.Init();
 
             return view;
+        }
+
+        /// <summary>
+        /// Shows a modal dialog of the specified type and returns a boolean indicating whether the modal was accepted or dismissed.
+        /// </summary>
+        /// <typeparam name="TModal">The modal</typeparam>
+        /// <returns>The modal was accepted ?</returns>
+        protected async Task<bool> ShowModal<TModal>()
+            where TModal : DefaultModal
+        {
+            TModal modal = this.ServiceProvider.GetRequiredService<TModal>();
+
+            return await modal.ShowModal();
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using MarquitoUtils.Main.Common.Tools;
 using MarquitoUtils.Main.Translate.Entities;
 using MarquitoUtils.Main.Translate.Services;
 using MarquitoUtils.MAUI.Config;
+using MarquitoUtils.MAUI.Modals;
 using MarquitoUtils.MAUI.Pages;
 using MarquitoUtils.MAUI.Views;
 using Syncfusion.Licensing;
@@ -43,6 +44,8 @@ namespace MarquitoUtils.MAUI.Startup
 
             this.ConfigureViews(assembly);
 
+            this.ConfigureModals(assembly);
+
             this.ConfigureOptions(this.AppBuilder);
         }
 
@@ -58,12 +61,11 @@ namespace MarquitoUtils.MAUI.Startup
             this.AppBuilder.Services.AddSingleton(translateService);
         }
 
-        #region Register pages and views
+        #region Register pages, views and modals
 
         /// <summary>
         /// Configure all the pages of the app as transient services.
         /// </summary>
-        /// <param name="builder">App builder</param>
         /// <param name="assembly">Assembly</param>
         private void ConfigurePages(Assembly assembly)
         {
@@ -78,12 +80,10 @@ namespace MarquitoUtils.MAUI.Startup
         /// <summary>
         /// Configure all the views of the app as transient services.
         /// </summary>
-        /// <param name="builder">App builder</param>
         /// <param name="assembly">Assembly</param>
         private void ConfigureViews(Assembly assembly)
         {
             this.AppBuilder.Services.AddTransient<ErrorView>();
-
 
             assembly.GetTypes()
                 .Where(type => type.IsInheritedBy<DefaultView>())
@@ -93,8 +93,21 @@ namespace MarquitoUtils.MAUI.Startup
                 });
         }
 
-        #endregion Register pages and view
-        #endregion Register pages and views
+        /// <summary>
+        /// Configure all the modals of the app as transient services.
+        /// </summary>
+        /// <param name="assembly">Assembly</param>
+        private void ConfigureModals(Assembly assembly)
+        {
+            assembly.GetTypes()
+                .Where(type => type.IsInheritedBy<DefaultModal>())
+                .ForEach(pageType =>
+                {
+                    this.AppBuilder.Services.AddTransient(pageType);
+                });
+        }
+
+        #endregion Register pages, views and modals
 
         protected abstract void ConfigureOptions(MauiAppBuilder builder);
 
